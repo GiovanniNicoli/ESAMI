@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida allo Studio - Esami 3a Media</title>
+    <style>
+        body {
+            font-family: 'Verdana', 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .subject-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .subject-btn {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+        .subject-btn:hover, .subject-btn.active-btn {
+            background-color: #1a252f;
+        }
+
+        .subject-section {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .subject-section.active {
+            display: block;
+        }
+        .subject-title {
+            color: #2c3e50;
+            border-bottom: 3px solid #bdc3c7;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .topic-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .topic-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .topic-btn:hover, .topic-btn.active-btn {
+            background-color: #2980b9;
+        }
+
+        .topic-content {
+            display: none;
+        }
+        .topic-content.active {
+            display: block;
+        }
+
+        .qa-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .qa-item {
+            background-color: #ecf0f1;
+            border-left: 5px solid #3498db;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .question {
+            font-weight: bold;
+            font-size: 1.15em;
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+        }
+        .toggle-btn {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            transition: 0.2s;
+        }
+        .toggle-btn:hover {
+            background-color: #d35400;
+        }
+        .answer {
+            display: none;
+            margin: 0;
+            font-size: 1.1em;
+            color: #34495e;
+            background-color: white;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #bdc3c7;
+        }
+        .answer.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Guida allo Studio per gli Esami</h1>
+
+    <!-- GRIGLIA MATERIE -->
+    <div class="subject-menu">
+        <button class="subject-btn" id="btn-storia" onclick="showSubject('sec-storia', 'btn-storia')">Storia</button>
+        <button class="subject-btn" id="btn-geografia" onclick="showSubject('sec-geografia', 'btn-geografia')">Geografia</button>
+        <button class="subject-btn" id="btn-scienze" onclick="showSubject('sec-scienze', 'btn-scienze')">Scienze</button>
+        <button class="subject-btn" id="btn-letteratura" onclick="showSubject('sec-letteratura', 'btn-letteratura')">Letteratura</button>
+        <button class="subject-btn" id="btn-tecnologia" onclick="showSubject('sec-tecnologia', 'btn-tecnologia')">Tecnologia</button>
+    </div>
+
+    <!-- SEZIONE STORIA -->
+    <div id="sec-storia" class="subject-section">
+        <h2 class="subject-title">Storia</h2>
+        
+        <div class="topic-menu">
+            <button class="topic-btn" id="btn-sto-1gm" onclick="showTopic('sto-1gm', 'btn-sto-1gm', 'storia')">Prima Guerra Mondiale</button>
+            <button class="topic-btn" id="btn-sto-fascismo" onclick="showTopic('sto-fascismo', 'btn-sto-fascismo', 'storia')">Fascismo</button>
+            <button class="topic-btn" id="btn-sto-2gm" onclick="showTopic('sto-2gm', 'btn-sto-2gm', 'storia')">Seconda Guerra Mondiale</button>
+        </div>
+
+        <!-- STORIA: Prima Guerra Mondiale -->
+        <div id="sto-1gm" class="topic-content" data-subject="storia">
+            <div class="qa-container">
+                <div class="qa-item">
+                    <p class="question">Quali sono le diverse cause della prima guerra mondiale (politica - militare, economica, culturale)</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Le cause del conflitto si dividono in quattro grandi gruppi: politiche, militari, economiche e culturali. Tutte queste ragioni hanno creato un clima di grandissima tensione in Europa. I diversi stati erano pronti a combattere e aspettavano solo una scusa per iniziare la guerra.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Descrivi la causa politica</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">La causa politica riguarda la rabbia e i contrasti tra le nazioni. La Francia voleva vendicarsi della Germania per riprendersi i territori dell'Alsazia e della Lorena. Nello stesso tempo, l'Austria e la Russia lottavano tra loro perché entrambe volevano comandare sui territori dei Balcani.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Descrivi la causa militare</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">La causa militare è conosciuta come "corsa agli armamenti". Tutti i paesi europei avevano paura di essere attaccati. Per questo motivo, hanno iniziato a costruire tantissime armi potenti e a ingrandire i loro eserciti per spaventare i paesi rivali.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Descrivi la causa economica</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">I paesi più ricchi e industrializzati, come Gran Bretagna e Germania, gareggiavano per conquistare nuove colonie in Africa e in Asia. Le colonie servivano per prendere materie prime a basso costo. Inoltre, permettevano alle nazioni europee di vendere i propri prodotti e arricchirsi.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Descrivi la causa culturale</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Si diffuse un sentimento forte e pericoloso chiamato "nazionalismo". Molte persone credevano che la propria nazione fosse superiore a tutte le altre. Alcuni pensavano addirittura che la guerra fosse un'azione eroica e utile per rendere il proprio paese il dominatore del mondo.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">In quali schieramenti si divide l'europa</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">L'Europa è divisa in due alleanze militari. Da una parte c'è la Triplice Alleanza, che comprende Germania, Austria e Italia. Dall'altra parte si trova la Triplice Intesa, formata da Francia, Gran Bretagna e Russia.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Qual è la causa militare della guerra?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">I generali degli eserciti avevano preparato milioni di soldati pronti a muoversi in treno in pochi giorni. Questi comandanti volevano usare la forza militare per dimostrare che il loro paese era imbattibile e superiore a tutti gli altri.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Come si collega alla causa economica?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Per mantenere grandi eserciti servivano enormi fabbriche industriali. La guerra garantiva grandissimi guadagni ai ricchi imprenditori. Loro potevano arricchirsi vendendo allo Stato milioni di fucili, cannoni e divise per i soldati.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Perché alcuni intellettuali erano favorevoli alla guerra?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Molti poeti e scrittori vedevano la guerra come un momento glorioso. Pensavano che il conflitto avrebbe "ripulito" la società dalle persone deboli e codarde. Credevano che il combattimento avrebbe reso l'Italia una nazione moderna, rispettata e temuta all'estero.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Qual è la scintilla che fa scoppiare la prima guerra mondiale?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">La scintilla esplode nella città di Sarajevo il 28 giugno del 1914. Uno studente serbo si avvicina alla carrozza e uccide con la pistola l'arciduca austriaco Francesco Ferdinando. Questa vittima era un personaggio importantissimo perché era l'erede al trono dell'Impero austriaco.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quali condizioni impone l'Austria nel suo ultimatum?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">L'Austria accusa la Serbia di aver organizzato l'attentato e manda un severissimo ultimatum. L'Austria esige che la propria polizia possa entrare liberamente in territorio serbo per arrestare i colpevoli. La Serbia rifiuta questa condizione perché le avrebbe fatto perdere la propria indipendenza.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Come si dichiara inizialmente l'Italia? Perché?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Allo scoppio della guerra nel 1914, l'Italia decide di restare neutrale, cioè fuori dal conflitto. L'Italia può farlo perché la Triplice Alleanza era un patto solo difensivo. Dato che era stata l'Austria ad attaccare per prima la Serbia, l'Italia non era obbligata ad aiutarla.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quali sono le ragioni degli interventisti?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Gli interventisti volevano entrare in guerra contro l'Austria per riconquistare le città di Trento e Trieste. Il loro sogno era quello di completare l'unificazione dell'Italia e dimostrare la forza militare del paese.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Chi sono gli interventisti (nazionalisti, esercito, grandi gruppi industriali, socialisti e democratici</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Erano gruppi di persone diverse tra loro. C'erano i nazionalisti in cerca di un'Italia potente e i comandanti dell'esercito. C'erano anche i grandi industriali che volevano arricchirsi vendendo armi. Infine, si unirono alcuni democratici e socialisti che volevano distruggere i vecchi imperi autoritari.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quante fasi ha il conflitto?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">La guerra si sviluppa in tre fasi. Inizia nel 1914 con una veloce guerra di movimento. Poi si blocca in una lunga e mortale guerra di posizione dentro le trincee, tra il 1915 e il 1917. Si conclude nel 1918 con l'offensiva finale e la ripresa del movimento.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che cosa avviene e chi combatte nella prima fase del conflitto?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Nella prima fase le truppe avanzano velocemente per sorprendere il nemico. La Germania attacca la Francia a sorpresa, passando illegalmente dal Belgio. Si combattono battaglie sanguinose tra tedeschi, francesi e inglesi, fino a quando gli eserciti si stancano, si fermano e iniziano a scavare le trincee.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Perché l'Italia è impreparata alla guerra?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">L'esercito italiano era molto debole. Mancavano fucili moderni, divise invernali calde e munizioni per i cannoni. Inoltre, i generali italiani usavano vecchie strategie militari sbagliate, mandando i soldati a morire correndo contro le mitragliatrici nemiche.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Perché gli stati uniti decidono di intervenire?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Gli Stati Uniti entrano in guerra nel 1917 perché i sottomarini della Germania affondavano di nascosto le navi americane cariche di merci e civili. Il presidente americano voleva anche aiutare le democrazie europee, come Francia e Gran Bretagna, a non farsi schiacciare dai tedeschi.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quali nuovi armi vennero utilizzate durante la prima guerra mondiale?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Vengono spruzzati i terribili gas tossici che soffocano e accecano i soldati. Si usano i lanciafiamme per colpire i nemici nascosti e le mitragliatrici che sparano tantissimi colpi al minuto. Infine, nel cielo compaiono i primi aerei usati per spiare e lanciare bombe.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quali nuovi mezzi militari vengono impiegati dagli eserciti?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Vengono inventati i carri armati, macchine d'acciaio capaci di passare sopra il filo spinato. Nel mare compaiono i sottomarini armati tedeschi per affondare le navi di nascosto. Inoltre, si usano moltissimo i treni per trasportare velocemente i soldati da un punto all'altro.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">In che modo le donne sono coinvolte nel conflitto mondiale?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Poiché gli uomini combattevano lontani al fronte, le donne presero in mano l'economia del paese. Iniziarono a lavorare nelle fabbriche per costruire armi e proiettili. Diventarono anche autiste di tram, lavoratrici nei campi agricoli e infermiere della Croce Rossa per curare i feriti.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che cosa avviene dopo l'uscita della Russia dalla guerra?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">La Russia abbandona la guerra nel 1917 a causa di una violenta rivoluzione interna. Questo permette all'Austria e alla Germania di spostare tutti i loro soldati contro l'Italia. Questo enorme attacco a sorpresa causa la grandissima e tragica sconfitta italiana a Caporetto.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Come si conclude la prima guerra mondiale?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">La guerra finisce negli ultimi mesi del 1918 con la vittoria totale dei paesi dell'Intesa. L'Austria e la Germania si ritrovano senza più soldati, le fabbriche non hanno materie prime e le persone muoiono di fame. Davanti alle proteste, i governi nemici sono costretti ad arrendersi.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quali sono le conseguenze della guerra?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Le conseguenze sono disastrose. Si contano quasi dieci milioni di giovani soldati morti. L'economia dell'Europa è distrutta e ci sono debiti enormi. Inoltre, la guerra fa crollare e cancellare definitivamente quattro antichi imperi: quello Russo, Austriaco, Tedesco e Ottomano.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che cos'è il principio di autodeterminazione?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">È un importante principio difeso dal presidente americano Wilson. Significa che ogni popolo con una propria cultura ha il diritto di decidere da solo da chi farsi governare. Ogni nazione dovrebbe essere libera e indipendente, senza subire il comando prepotente di paesi stranieri.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Dove si svolgono i trattati di pace?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">I trattati di pace si svolgono in Francia, nella città di Parigi. Il documento più importante e famoso viene firmato nel 1919 nella bellissima e grande reggia di Versailles, un palazzo scelto per dare grande importanza all'evento.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Chi partecipa ai trattati di pace?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Ai tavoli per decidere la pace si siedono solamente i capi di governo dei paesi vincitori, come Stati Uniti, Gran Bretagna, Francia e Italia. I rappresentanti dei paesi sconfitti non vengono ammessi e devono solo accettare in silenzio le punizioni decise dagli altri.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che cosa sono i 14 punti di Wilson?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Sono quattordici regole scritte dal presidente americano Woodrow Wilson per creare una pace giusta nel mondo. Tra le regole c'erano l'obbligo di ridurre le armi in tutti i paesi, la libertà di commercio nei mari e la fine delle alleanze militari segrete.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quali sono gli obiettivi reali delle potenze vincitrici?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Nonostante le idee di pace, la Francia e la Gran Bretagna volevano unicamente punire la Germania in modo durissimo. Volevano distruggerla economicamente per non farla mai più diventare un pericolo. Inoltre, volevano dividersi e rubare le ricche colonie tedesche in Africa.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che cosa accade alla Germania?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">La Germania subisce una punizione severissima. Viene considerata l'unica vera colpevole della guerra. Viene obbligata a pagare una somma di denaro altissima per i danni, deve cedere molti territori e le viene proibito di avere navi, aerei e un grande esercito.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Perché l'Italia non ottiene i territori promessi con il trattato di Londra?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Il presidente americano Wilson si oppone alle richieste dell'Italia. Usando il principio di autodeterminazione, Wilson impedisce all'Italia di prendere la regione della Dalmazia e la città di Fiume. Il motivo era che in quelle terre vivevano popolazioni slave che dovevano essere indipendenti.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Perché con i trattati di pace non si raggiunge un equilibrio stabile?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Le punizioni date ai paesi sconfitti erano troppo crudeli e ingiuste. Questo atteggiamento crea tantissima povertà e un profondo desiderio di vendetta. In Germania le persone si sentono tradite e piene di rabbia, creando le basi per lo scoppio della Seconda Guerra Mondiale.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che cos'è la Società delle Nazioni?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">È una grande organizzazione politica nata dopo la guerra, simile all'attuale ONU. Il suo scopo era far parlare i capi di governo intorno a un tavolo per risolvere i problemi in modo pacifico, evitando per sempre di usare le armi e fare nuove guerre.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">In che situazione si trova l'Europa nel dopoguerra?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">L'Europa si trova in una condizione di miseria. Manca il cibo dai campi e i prezzi delle merci salgono moltissimo. Le fabbriche chiudono, lasciando molte persone senza lavoro. I soldati tornati dal fronte fanno grande fatica a ritrovare un lavoro e una vita normale.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- STORIA: Fascismo -->
+        <div id="sto-fascismo" class="topic-content" data-subject="storia">
+            <div class="qa-container">
+                <div class="qa-item">
+                    <p class="question">Qual è l'effetto della prima guerra mondiale sull'economia italiana?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">La guerra lascia l'economia italiana in grave crisi. Lo Stato ha enormi debiti con altri paesi. I prezzi delle merci salgono rapidamente, rendendo le persone più povere. Inoltre, c'è tantissima disoccupazione tra i soldati tornati dal fronte che cercano lavoro.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Qual è il pensiero di molti Italiani rispetto alle condizioni di pace imposte all'Italia?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Molti italiani sono delusi e indignati. Sanno di aver vinto la guerra sopportando grandi sacrifici. Si sentono però traditi e imbrogliati dalle altre potenze europee, perché l'Italia non ha ricevuto i territori sulla costa adriatica promessi all'inizio del conflitto.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che cosa accade nel biennio rosso?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Negli anni 1919 e 1920 esplodono fortissime proteste. Migliaia di operai e contadini scioperano continuamente e con violenza per chiedere diritti e terre. Queste azioni spaventano molto i proprietari ricchi, che temono una rivoluzione comunista come in Russia.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che cos'è il trattato di Rapallo?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">È un importante accordo firmato nel 1920 tra l'Italia e la Jugoslavia per stabilire i confini. L'Italia ottiene l'Istria e la città di Zara, ma rinuncia alla Dalmazia. La città di Fiume viene dichiarata indipendente da entrambi i paesi.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che cosa si intende per sciopero bianco?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">È una forma di protesta silenziosa. Gli operai entrano regolarmente in fabbrica, ma si rifiutano categoricamente di lavorare e far funzionare le macchine. In questo modo bloccano la produzione e causano gravi danni economici ai padroni.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che cosa si intende con occupazione delle fabbriche?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Nel 1920 la tensione aumenta. Gli operai non si limitano a scioperare, ma invadono le fabbriche armati. Cacciano i proprietari e provano a gestire le macchine da soli, sperando di far iniziare una vera rivoluzione nel paese.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Cosa si intende con vittoria mutilata?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">È un'espressione forte inventata dal poeta Gabriele D'Annunzio. Significa che l'Italia ha vinto la guerra sul campo, ma la sua vittoria è stata "tagliata" ai tavoli della pace. Questo perché l'Italia non ha ricevuto la Dalmazia e Fiume come desiderava.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Chi è Benito Mussolini?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Mussolini nasce come maestro elementare ed è un giornalista politico. Prima della guerra era un esponente del partito socialista, ma viene espulso perché voleva entrare in guerra. Successivamente fonda e diventa il capo assoluto e violento del Fascismo.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Qual é la sua posizione rispetto alle proteste operaie e contadine?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Mussolini si schiera con violenza contro i lavoratori. Organizza gruppi armati, chiamati camicie nere, che picchiano gli operai per fermare gli scioperi. Grazie a queste azioni, Mussolini guadagna la simpatia e i soldi dei ricchi industriali spaventati.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">All'interno di quale lista i fascisti entrano per la prima volta nel Parlamento Italiano?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Entrano in Parlamento nel 1921 usando i "Blocchi Nazionali". Era una lista politica creata dai vecchi politici moderati guidati da Giolitti. Loro credevano di poter usare e controllare Mussolini, ma commisero un gravissimo errore.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Cosa sono i fasci di combattimento?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Sono il primo movimento politico creato da Mussolini nel 1919 a Milano. Erano formati da giovani ex soldati ed esprimevano un forte nazionalismo. Usavano sistematicamente la violenza fisica contro i rivali politici per ripristinare l'ordine con la forza.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Cos'è la marcia su Roma?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Nell'ottobre del 1922, decine di migliaia di fascisti in camicia nera convergono in armi verso Roma. Era una dimostrazione di forza militare pensata per spaventare il governo e costringere il Re a cedere il potere a Mussolini senza elezioni.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Come reagisce il re alla marcia su Roma?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Il Re Vittorio Emanuele III ha paura di scatenare una guerra civile. Invece di usare l'esercito per fermare i fascisti, si arrende. Il 30 ottobre decide di chiamare Mussolini e gli consegna ufficialmente il compito di governare l'Italia.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Chi è Matteotti? Qual é la sua storia?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Giacomo Matteotti è un coraggioso deputato socialista. Nel 1924 fa un discorso in parlamento denunciando le violenze e i brogli dei fascisti alle elezioni. Pochi giorni dopo, i fascisti lo rapiscono in strada e lo uccidono per farlo tacere.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Come costruisce Mussolini lo stato totalitario?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Mussolini smonta la democrazia cancellando le libertà civili. Elimina la libertà di stampa, vieta gli altri partiti politici e scioglie i sindacati. Inoltre, crea tribunali speciali per arrestare chiunque osi criticare le sue decisioni.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Cos'è uno stato totalitario?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">È un governo severissimo in cui non esiste alcuna libertà individuale. Un solo partito e un solo capo comandano su tutto. Lo Stato controlla in modo stretto e continuo il lavoro, la scuola e persino il tempo libero di ogni singola persona.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quando vengono emanate le leggi fascistissime?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Queste leggi spietate vengono varate tra il 1925 e il 1926. Sono proprio queste norme a segnare la fine definitiva della democrazia italiana e a trasformare ufficialmente il governo in una vera e propria dittatura repressiva.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quali strumenti utilizza il fascismo per costruire il consenso?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Il fascismo usa molto la scuola, imponendo un unico libro di testo per lodare il Duce. Inquadra i bambini in gruppi paramilitari come i Balilla. Inoltre, organizza gite e sport per i lavoratori adulti attraverso l'organizzazione del Dopolavoro.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che rapporto ha il fascismo con i mezzi di comunicazione?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Il regime controlla tutto in maniera totale. Usa i giornali, i filmati al cinema e la radio per fare un'intensa propaganda. Nasconde tutte le notizie negative e fa credere al popolo che l'Italia sia una nazione ricca e imbattibile.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Cosa sono i Patti Lateranensi?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Sono un importante trattato di pace firmato nel 1929 tra l'Italia fascista e la Chiesa Cattolica. Questi patti riconoscono il Vaticano come stato indipendente e dichiarano il cattolicesimo come l'unica religione ufficiale dell'Italia.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Perché Mussolini stipula un concordato con la chiesa di Roma?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Mussolini sa che quasi tutti gli italiani sono profondamente cattolici. Diventando alleato del Papa, Mussolini ottiene moltissima fiducia da parte della popolazione e aumenta enormemente il suo potere nel paese.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Com'è considerata l'opposizione politica del regime fascista?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Ogni forma di opposizione è considerata un gravissimo crimine contro lo Stato. Chi ha idee diverse dal fascismo è visto come un nemico da eliminare e reprimere immediatamente con la forza.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">A quali diverse scuole di pensiero appartengono gli antifascisti?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Gli antifascisti provenivano da molte idee politiche diverse. C'erano comunisti, intellettuali liberali, socialisti e cattolici. Pur avendo idee molto diverse tra loro, si sono uniti per lottare in segreto contro la dittatura.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Chi finisce in carcere o in esilio per aver difeso i valori della democrazia?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Persone importanti come Antonio Gramsci, Sandro Pertini, don Luigi Sturzo e i fratelli Rosselli. Furono mandati nelle carceri, costretti a vivere isolati in piccole isole del sud (il confino) oppure scapparono in Francia per salvarsi la vita.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Cosa si intende con autarchia?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">L'autarchia è un sistema economico imposto da Mussolini. Significa che l'Italia doveva produrre da sola tutto ciò di cui aveva bisogno, dal grano all'acciaio, senza comprare più nulla dai paesi stranieri.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">A che cosa serviva l'autarchia?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">L'autarchia serviva a rendere l'Italia indipendente dalle altre nazioni. Mussolini preparava il paese alla guerra. Voleva un'economia in grado di resistere nel caso in cui le nazioni nemiche bloccassero i commerci marittimi.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Com'è l'economia italiana rispetto a quella degli altri paesi europei?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Nonostante la propaganda dica il contrario, l'economia italiana è debole e arretrata rispetto a Germania e Gran Bretagna. Le fabbriche del Nord funzionano, ma nel Sud l'agricoltura rimane molto povera e senza mezzi moderni.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Verso quale categoria si scaricano i costi della crisi industriale?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">I costi vengono pagati dalle persone più povere. I grandi industriali fanno ottimi affari con il governo. Al contrario, gli operai e i contadini vedono i propri salari abbassarsi molto e perdono ogni diritto di protestare per migliorare la loro vita.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">A che cosa si ispira l'azione del regime fascista in politica estera?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Si ispira alla storia gloriosa dell'antico Impero Romano. L'obiettivo militare è usare l'esercito per dominare sugli altri popoli. Mussolini voleva riconquistare una posizione di potere nel Mediterraneo sottomettendo nuove colonie.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quali risultati ottiene Mussolini con la conquista dell'etiopia?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Nel 1936 conquista l'Etiopia usando anche gas tossici. In Italia ottiene grande popolarità e fonda un nuovo Impero. Però, a causa di questa violenza, le altre nazioni isolano l'Italia, spingendo Mussolini ad allearsi pericolosamente con Hitler.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Cosa sono le leggi razziali del 1938?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Sono leggi disumane scritte per copiare la Germania nazista. Cancellano all'improvviso i diritti degli ebrei italiani. Impediscono loro di insegnare, di frequentare le scuole pubbliche e li allontanano crudelmente dalla vita normale del paese.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Perché il biennio rosso favorisce l'ascesa del fascismo in Italia?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Le violente proteste degli operai nel biennio rosso terrorizzano la ricca borghesia. I proprietari temono una rivoluzione e, per paura, decidono di finanziare i fascisti. Vedono in Mussolini l'uomo forte capace di riportare l'ordine con i bastoni.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Come giunge al potere Benito Mussolini</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Usa un misto di astuzia politica e grande violenza militare. Organizza le camicie nere per picchiare gli avversari. Infine, approfitta della debolezza del Re durante la marcia su Roma, facendosi consegnare il governo senza vincere le elezioni.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Perché il fascismo è totalitarismo?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Perché lo Stato si impadronisce di ogni aspetto della società. Non c'è un parlamento libero, esiste un solo partito e non si può esprimere la propria opinione. Il dittatore decide tutto, dalla politica all'educazione di ogni singolo cittadino.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- STORIA: Seconda Guerra Mondiale -->
+        <div id="sto-2gm" class="topic-content" data-subject="storia">
+            <div class="qa-container">
+                <div class="qa-item">
+                    <p class="question">Come comincia la seconda guerra mondiale?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">La Seconda Guerra Mondiale inizia il 1° settembre 1939. In questa data, l'esercito della Germania nazista invade improvvisamente la Polonia per allargare i propri territori. A causa di questo attacco, Francia e Gran Bretagna dichiarano subito guerra ad Hitler per difendere la Polonia.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">A seguito dell'invasione tedesca come rimane diviso il territorio francese?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">La Francia perde la battaglia e viene divisa in due. Il nord, inclusa Parigi, finisce sotto il duro comando militare diretto dei tedeschi. A sud si forma il debole governo di Vichy. Questo governo è formato da francesi che però sono costretti a ubbidire agli ordini dei nazisti.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Come va a finire il progetto di Hitler di invasione dell'Inghilterra?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Il piano di Hitler fallisce completamente. Per invadere via mare, Hitler decide di bombardare le città inglesi usando gli aerei. Tuttavia, l'aviazione britannica combatte con incredibile coraggio nei cieli e distrugge molti aerei tedeschi, costringendo la Germania a ritirarsi.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Qual è la posizione iniziale dell'Italia?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Nel 1939 l'Italia dichiara la "non belligeranza". Questo significa che l'Italia è alleata della Germania ma decide di non entrare subito in guerra. Mussolini sa che l'esercito italiano è povero di armi ed è sfinito dalle guerre combattute prima in Etiopia e in Spagna.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Perché Mussolini decide di dichiarare guerra alla Francia e alla Gran Bretagna?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Nel 1940 Mussolini osserva la forza della Germania. Vede che i tedeschi conquistano la Francia in pochissimo tempo. Convinto che la guerra stia per finire subito con la vittoria dell'Asse, Mussolini dichiara guerra per potersi sedere al tavolo dei vincitori e chiedere nuovi territori.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">L'Italia era preparata al conflitto?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Assolutamente no. L'esercito italiano era debolissimo. Aveva aerei lenti, pochissimi carri armati, pochi camion e divise vecchie. Inoltre, all'Italia mancavano le materie prime fondamentali come il petrolio e l'acciaio necessari per resistere a lungo in una guerra moderna.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che ruolo hanno i tedeschi riguardo ai tentativi di conquista da parte dell'Italia?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">L'Italia cerca di fare le sue battaglie attaccando la Grecia e l'Africa, ma subisce gravissime sconfitte da parte degli inglesi. L'esercito tedesco deve correre in soccorso degli italiani mandando potenti carri armati e generali per evitare che l'Italia venga distrutta subito.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Su quali fronti è impegnato l'esercito italiano?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Gli italiani combattono in tre posti molto lontani. In Nord Africa, tra Libia ed Egitto. Nei Balcani, per tentare di conquistare la Grecia e la Jugoslavia. Infine, molti soldati italiani vengono mandati a combattere e morire nel gelo della Russia per aiutare l'esercito tedesco.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quando la Germania invade l'unione sovietica?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">L'attacco a sorpresa alla Russia, chiamato Operazione Barbarossa, scatta nel giugno 1941. Hitler rompe gli accordi precedenti perché desidera conquistare le enormi pianure russe. Voleva rubare il loro grano, le preziose riserve di petrolio e distruggere il nemico comunista.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Come si giunge all'ingresso di Giappone e Stati Uniti ne conflitto?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Nel dicembre 1941 gli aerei del Giappone attaccano a tradimento le navi da guerra degli Stati Uniti nel porto di Pearl Harbor. A causa di questo bombardamento inaspettato, gli Stati Uniti dichiarano guerra al Giappone e alla Germania, alleandosi immediatamente con gli inglesi.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Cosa succede tra il 1942 e il 1943?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Avviene il grande cambiamento della guerra. L'esercito russo resiste al freddo e sconfigge i tedeschi facendoli indietreggiare. Nello stesso tempo, gli Stati Uniti vincono le battaglie in mare contro i giapponesi e liberano tutto il Nord Africa dalla presenza italo-tedesca.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che cosa succede dopo che gli alleati sbarcano in Sicilia?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Il fascismo crolla. Il Re toglie il potere a Mussolini e lo fa arrestare il 25 luglio 1943. Il Re affida poi il governo al generale Badoglio. Il nuovo governo italiano decide in segreto di fare la pace con gli Stati Uniti e la Gran Bretagna per uscire dalla guerra.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quando sbarcano in Sicilia gli alleati?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Le grandissime truppe americane e britanniche sbarcano in Sicilia nel luglio del 1943. Portano navi e mezzi potentissimi. Da questa isola, gli Alleati iniziano il faticoso cammino per liberare tutta l'Italia spingendosi dal sud verso il nord.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Dove si rifugiano il Re e Badoglio dopo l'armisitizio?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Dopo aver firmato la pace l'8 settembre 1943, il Re e Badoglio scappano spaventati da Roma e si rifugiano a Brindisi, in Puglia. Vanno al Sud per nascondersi sotto la protezione sicura dell'esercito Alleato e non farsi catturare dai soldati tedeschi arrabbiati.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Che cos'è la repubblica sociale italiana?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Mussolini viene liberato dai tedeschi e fonda un nuovo stato nel nord Italia, chiamato Repubblica di Salò. Questo nuovo stato fascista ha un proprio esercito di italiani, ma in realtà è completamente sottomesso alla prepotenza e agli ordini spietati della Germania di Hitler.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Perché la guerra di liberazione è anche una guerra civile?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Diventa una guerra civile perché gli italiani si combattono tra di loro fino alla morte. Al Nord Italia, i partigiani italiani combattono coraggiosamente per la libertà, sparando contro altri italiani fedeli a Mussolini e arruolati nell'esercito fascista della Repubblica Sociale.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Cos'è il comitato di Liberazione Nazionale?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Il CLN è l'organizzazione segreta dei partigiani. Riunisce i rappresentanti dei partiti politici antifascisti (comunisti, cattolici e liberali). Il CLN serviva a organizzare, guidare e rifornire di armi le lotte dei partigiani contro i nemici nel territorio occupato dai tedeschi.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Dove si sviluppa soprattutto la resistenza?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">La Resistenza si sviluppa fortemente nelle regioni del Centro e del Nord Italia. I gruppi di partigiani si nascondono molto bene sui monti, nelle colline e lungo le grandi valli. Operano anche all'interno delle città industriali del nord nascondendosi tra gli operai.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Come reagiscono i tedeschi e i fascisti agli attacchi dei partigiani?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">La reazione dei tedeschi è spaventosa. Mettono in atto punizioni terribili chiamate "rappresaglie". Per punire i ribelli e terrorizzare il popolo, i nazisti uccidono donne, bambini e anziani innocenti, e bruciano intere piazze e paesi di campagna senza pietà.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">I partigiani slavi come trattano gli italiani nell'istria?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Sul confine vicino alla Jugoslavia avvengono violenze gravissime. I partigiani slavi accusano molti italiani civili di essere tutti fascisti oppressori. Tantissimi italiani innocenti vengono catturati, uccisi e gettati nelle "foibe", che sono profonde spaccature rocciose tipiche della zona.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quando viene liberata l'Italia?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">L'Italia viene considerata finalmente e totalmente libera il 25 aprile del 1945. In questa giornata storica tutte le principali città del nord organizzano una rivolta decisiva. Ancora oggi celebriamo il 25 aprile come la grande Festa Nazionale della Liberazione.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Da chi viene liberata?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">L'Italia viene liberata dal lavoro di due forze insieme. Da sud arrivano e sfondano le potenti armate dei militari Alleati (americani e inglesi). Nelle città del nord, invece, ci pensano gli attacchi armati coraggiosi dei gruppi segreti partigiani.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Cosa succede durante la risalita degli alleati?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">La risalita alleata verso nord è lenta, lunga e piena di morti. I tedeschi si difendono con cattiveria lungo le montagne creando barriere durissime, come la famosa Linea Gotica. Gli Alleati impiegano moltissimi mesi sotto la neve per superare queste fortificazioni.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Come si chiude la vita di Mussolini?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Pochi giorni prima della fine, Mussolini tenta di fuggire in Svizzera vestito con un cappotto da militare tedesco. Viene però riconosciuto da alcuni partigiani sul confine. Viene arrestato immediatamente e fucilato, e il suo corpo viene esposto in piazza a Milano.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Cosa accade ai fascisti dopo la liberazione?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Nelle giornate piene di caos dopo la fine della guerra, scatta la rabbia delle persone. Molti fascisti e spie che si erano resi colpevoli di crimini e torture vengono catturati e uccisi rapidamente dalle folle arrabbiate o dai partigiani, senza fare veri processi.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Perché la seconda guerra mondiale è considerata una guerra totale?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">È chiamata "totale" perché colpisce e distrugge chiunque, anche chi non combatte. Gli aerei bombardano e polverizzano le case nelle città per spaventare e disperare la popolazione. In questa guerra, i civili morti sotto le bombe o di fame sono stati più numerosi dei soldati al fronte.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Perché è anche una guerra tecnologica?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Gli scienziati sono stati obbligati a inventare strumenti nuovi per uccidere. Nascono aerei moderni, il sistema dei radar per vedere nel buio e macchine matematiche per indovinare i codici segreti. La tecnologia più grave è l'invenzione finale e devastante della bomba atomica.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Perchè è una guerra di sterminio?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">È una guerra di sterminio perché i tedeschi vogliono letteralmente cancellare dal mondo intere popolazioni che ritengono inferiori. L'intenzione non è solo sconfiggere gli eserciti nemici, ma sterminare uomini, donne e bambini per ragioni razziali e in modo spietato e organizzato.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quali sono le vicende che segnano la fine della guerra in Europa?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Nei primi mesi del 1945 l'enorme esercito russo entra nel centro di Berlino, la capitale tedesca, e la distrugge. Hitler, capendo di essere ormai circondato e sconfitto, decide di suicidarsi nel suo nascondiglio. Pochi giorni dopo, a maggio, la Germania si arrende.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quale evento costringe alla resa il Giappone?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Il Giappone era l'unica nazione che si rifiutava di arrendersi. Nell'agosto del 1945 il presidente americano sgancia due spaventose bombe atomiche sulle città di Hiroshima e Nagasaki. Le armi distruggono tutto all'istante e fanno così tanta paura che il Giappone si arrende subito.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Cos'è la soluzione finale del problema ebraico?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">È il piano organizzato dai nazisti per eliminare completamente il popolo ebraico dall'Europa (la Shoah). Milioni di persone vengono caricate su treni carri bestiame e spedite nei campi di concentramento. Qui vengono uccise in modo rapido e orribile usando le camere a gas.</p>
+                </div>
+                <div class="qa-item">
+                    <p class="question">Quali violenze subiscono i civili durante gli anni della resistenza?</p>
+                    <button class="toggle-btn" onclick="toggleAnswer(this)">Mostra risposta</button>
+                    <p class="answer">Le persone comuni vivono anni spaventosi. Soffrono la fame e vedono le case distrutte dalle bombe aeree. Molti giovani vengono presi con la forza dai tedeschi e mandati a fare lavori pesanti. Infine, gli abitanti dei paesi di montagna rischiano di morire nelle rappresaglie.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEZIONE GEOGRAFIA -->
+    <div id="sec-geografia" class="subject-section">
+        <h2 class="subject-title">Geografia</h2>
+        <div class="topic-menu">
+            <button class="topic-btn" id="btn-geo-giappone" onclick="showTopic('geo-giappone', 'btn-geo-giappone', 'geografia')">Il Giappone</button>
+            <button class="topic-btn" id="btn-geo-demografia" onclick="showTopic('geo-demografia', 'btn-geo-demografia', 'geografia')">Crescita Demografica</button>
+        </div>
+
+        <div id="geo-giappone" class="topic-content" data-subject="geografia">
+            <div class="qa-container">
+                <p><em>(Sezione pronta ad accogliere le domande in fase di preparazione)</em></p>
+            </div>
+        </div>
+
+        <div id="geo-demografia" class="topic-content" data-subject="geografia">
+            <div class="qa-container">
+                <p><em>(Sezione pronta ad accogliere le domande in fase di preparazione)</em></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEZIONE SCIENZE -->
+    <div id="sec-scienze" class="subject-section">
+        <h2 class="subject-title">Scienze</h2>
+        <div class="topic-menu">
+            <button class="topic-btn" id="btn-sci-genetica" onclick="showTopic('sci-genetica', 'btn-sci-genetica', 'scienze')">Genetica e DNA</button>
+            <button class="topic-btn" id="btn-sci-forza" onclick="showTopic('sci-forza', 'btn-sci-forza', 'scienze')">Forza e Moto</button>
+        </div>
+        <div id="sci-genetica" class="topic-content" data-subject="scienze">
+            <div class="qa-container">
+                <p><em>(Sezione pronta ad accogliere le domande in fase di preparazione)</em></p>
+            </div>
+        </div>
+        <div id="sci-forza" class="topic-content" data-subject="scienze">
+            <div class="qa-container">
+                <p><em>(Sezione pronta ad accogliere le domande in fase di preparazione)</em></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEZIONE LETTERATURA -->
+    <div id="sec-letteratura" class="subject-section">
+        <h2 class="subject-title">Letteratura</h2>
+        <div class="topic-menu">
+            <button class="topic-btn" id="btn-let-leopardi" onclick="showTopic('let-leopardi', 'btn-let-leopardi', 'letteratura')">Giacomo Leopardi</button>
+        </div>
+        <div id="let-leopardi" class="topic-content" data-subject="letteratura">
+            <div class="qa-container">
+                <p><em>(Sezione pronta ad accogliere le domande in fase di preparazione)</em></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEZIONE TECNOLOGIA -->
+    <div id="sec-tecnologia" class="subject-section">
+        <h2 class="subject-title">Tecnologia</h2>
+        <div class="topic-menu">
+            <button class="topic-btn" id="btn-tec-combustibili" onclick="showTopic('tec-combustibili', 'btn-tec-combustibili', 'tecnologia')">Energia Combustibile</button>
+            <button class="topic-btn" id="btn-tec-rinnovabili" onclick="showTopic('tec-rinnovabili', 'btn-tec-rinnovabili', 'tecnologia')">Energia Rinnovabile</button>
+        </div>
+        <div id="tec-combustibili" class="topic-content" data-subject="tecnologia">
+            <div class="qa-container">
+                <p><em>(Sezione pronta ad accogliere le domande in fase di preparazione)</em></p>
+            </div>
+        </div>
+        <div id="tec-rinnovabili" class="topic-content" data-subject="tecnologia">
+            <div class="qa-container">
+                <p><em>(Sezione pronta ad accogliere le domande in fase di preparazione)</em></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSubject(sectionId, btnId) {
+            let sections = document.querySelectorAll('.subject-section');
+            sections.forEach(function(sec) {
+                sec.classList.remove('active');
+            });
+
+            let buttons = document.querySelectorAll('.subject-btn');
+            buttons.forEach(function(btn) {
+                btn.classList.remove('active-btn');
+            });
+
+            let allTopics = document.querySelectorAll('.topic-content');
+            allTopics.forEach(function(topic) {
+                topic.classList.remove('active');
+            });
+
+            let allTopicBtns = document.querySelectorAll('.topic-btn');
+            allTopicBtns.forEach(function(tBtn) {
+                tBtn.classList.remove('active-btn');
+            });
+
+            document.getElementById(sectionId).classList.add('active');
+            document.getElementById(btnId).classList.add('active-btn');
+        }
+
+        function showTopic(topicId, btnId, subjectType) {
+            let topics = document.querySelectorAll('.topic-content[data-subject="' + subjectType + '"]');
+            topics.forEach(function(topic) {
+                topic.classList.remove('active');
+            });
+
+            let currentSection = document.getElementById('sec-' + subjectType);
+            let topicBtns = currentSection.querySelectorAll('.topic-btn');
+            topicBtns.forEach(function(btn) {
+                btn.classList.remove('active-btn');
+            });
+
+            document.getElementById(topicId).classList.add('active');
+            document.getElementById(btnId).classList.add('active-btn');
+        }
+
+        function toggleAnswer(btn) {
+            let answerDiv = btn.nextElementSibling;
+            
+            if (answerDiv.classList.contains('show')) {
+                answerDiv.classList.remove('show');
+                btn.innerText = "Mostra risposta";
+                btn.style.backgroundColor = "#e67e22";
+            } else {
+                answerDiv.classList.add('show');
+                btn.innerText = "Nascondi risposta";
+                btn.style.backgroundColor = "#c0392b";
+            }
+        }
+    </script>
+</body>
+</html>
